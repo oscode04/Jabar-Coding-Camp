@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button onclick="vm.openform()">Open Form</button>
+        <h1>{{ 'Nilai a : ' + a }}</h1>
+        <h1>{{ 'Rata rata : ' + rataRata() }}</h1>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var vm =new Vue({
+            el: '#app',
+            data: {
+                a : 0,
+                hasil : 0
+            },
+            methods : {
+                rataRata : function(){
+                    let rataRata = this.a/this.hasil
+                    rataRata = rataRata ? rataRata : 0
+                    return rataRata
+                },
+                openform : function(){
+                    while(this.a < 10){
+                        this.a += parseInt(prompt("Masukan nilai a"))
+                        this.hasil++
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
