@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <input type="text" v-model="search" placeholder="Masukan kata kunci">
+       <ul v-for="book in books">
+            <li>{{book.bookTitle}}</li>
+       </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: { search: "",
+                    booksList: [
+                        {bookTitle: 'Kalkulus Dasar'},
+                        {bookTitle: 'Fisika Dasar'},
+                        {bookTitle: 'Aljabar Linier Elementer'},
+                        {bookTitle: 'Aljabar Abstrak'},
+                        {bookTitle: 'Algoritma Pemrograman'}
+                    ]
+            },
+            computed: {
+                books: function() {
+                    return this.booksList.filter((book)=>{
+                        return book.bookTitle.toLowerCase().match(this.search)
+                    })
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>
