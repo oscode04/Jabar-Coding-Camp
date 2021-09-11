@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="user" name="user" id="user" @keyup.enter="addUser">
+        <button @click="addUser()">add</button>
+        <ul v-for="(user, index) in users">
+            <li>{{ user.name }}
+                <button @click="deleteUser(index)">Delete</button>
+                <button @click="updateUser(index)">Update</button>
+            </li>
+            
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data () {
+               return {
+                users : [
+                    {
+                        'name' : 'Muhammad Iqbal Mubarok',
+                    },
+                    {
+                        'name' : 'Ruby Purwanti',
+                    },
+                    {
+                        'name' : 'Faqih Muhammad',
+                    },
+                ],
+                updated:"",
+                update: false,
+                user : ""
+               }
+            },
+            methods: {
+                addUser() {
+                    this.users.push({name: this.user});
+                    this.user = "";
+                },
+                deleteUser(index) {
+                    let ask = confirm("Apakah anda yakin ingin menghapusnya?")
+                    if(ask == true){
+                        this.users.splice(index, 1);
+                    } else{
+                        return
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
