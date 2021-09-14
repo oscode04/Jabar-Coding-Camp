@@ -8,23 +8,31 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" v-model="user" name="user" id="user" @keyup.enter="addUser">
-        <button @click="addUser()">add</button>
+        <div v-if="!isUpdating">
+            <input type="text" v-model="user" name="user" id="user" @keyup.enter="addUser">
+            <button @click="addUser()">add</button>    
+        </div>
+        <div v-else>
+            <input type="text" v-model="user" name="user" id="user" @keyup.enter="updateUser">
+            <button @click="updateUser()">Update</button>
+        </div>
+        
         <ul v-for="(user, index) in users">
             <li>{{ user.name }}
                 <button @click="deleteUser(index)">Delete</button>
-                <button @click="updateUser(index)">Update</button>
-            </li>
-            
+                <button @click="editUser(index)">Update</button>
+            </li>    
         </ul>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
-            data () {
-               return {
+            data: {
+                isUpdating  : false,
+                selectedIndex : null,
                 users : [
                     {
                         'name' : 'Muhammad Iqbal Mubarok',
@@ -36,10 +44,8 @@
                         'name' : 'Faqih Muhammad',
                     },
                 ],
-                updated:"",
-                update: false,
                 user : ""
-               }
+               
             },
             methods: {
                 addUser() {
@@ -53,6 +59,16 @@
                     } else{
                         return
                     }
+                },
+                editUser(index) {
+                    this.user =  this.users[index].name;
+                    this.selectedIndex = index
+                    this.isUpdating = true
+                },
+                updateUser() {
+                    this.users[this.selectedIndex].name = this.user
+                    this.isUpdating = false
+                    this.user = ""
                 }
             }
         })
