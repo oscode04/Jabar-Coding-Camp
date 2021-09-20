@@ -36,7 +36,7 @@
      <label>Description : </label>
      <textarea name="description" :disabled="buttonStatus == 'upload'" ref="description" v-model="description" ></textarea>
      
-     <div v-if="buttonStatus = 'submit'">
+     <div v-if="buttonStatus == 'submit'">
        <input type="submit" value="SUBMIT">
      </div>
      <div v-else-if="buttonStatus == 'update'">
@@ -128,7 +128,7 @@
                 
               })
               .catch( (error) => {
-                console.log(error)
+                
               })
            }
 
@@ -184,11 +184,11 @@
         },
 
         clearForm : function(){
-          title = ''
-          description = ''
-          buttonStatus = 'submit'
-          idEditBlog = null
-          idUploadBlog = null
+          this.title = ''
+          this.description = ''
+          this.buttonStatus = 'submit'
+          this.idEditBlog = null
+          this.idUploadBlog = null
         },
 
         updateBlog : function(id){
@@ -241,7 +241,7 @@
 
                     let config = {
                         method : "post",
-                        url : `http://demo-api-vue.sanbercloud.com/api/member/${id}/upload-photo-profile`,
+                        url : `http://demo-api-vue.sanbercloud.com/api/member/${id}/upload-photo`,
                         data : formData
                     }
 
